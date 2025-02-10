@@ -76,16 +76,104 @@ CherrygrovePokeCenter1FGentlemanText:
 	done
 
 CherrygrovePokeCenter1FLadyText:
-	text "#mon Journal"
-	line "has such fascin-"
-	cont "ating stories!"
+	opentext
+	writetext WonderTradeIntroText
+	waitbutton
+	checkevent EVENT_INTRODUCED_TEALA
+	iftruefwd .introduced
+	writetext IntroduceTealaText
+	waitbutton
+	setevent EVENT_INTRODUCED_TEALA
+.introduced
+	writetext WonderTradeExplanationText
+	promptbutton
+	special WonderTrade
+	iffalsefwd .done
+	playmusic MUSIC_POKECOM_CENTER
+	writetext WonderTradeCompleteText
+	playsound SFX_DEX_FANFARE_80_109
+	waitsfx
+	ifnotequal 2, .done
+	setevent EVENT_GOT_GS_BALL_FROM_POKECOM_CENTER
+	setevent EVENT_CAN_GIVE_GS_BALL_TO_KURT
+	playmusic MUSIC_SPIKY_EARED_PICHU_HGSS
+	writetext WonderTradeForGSBallPichuText
+	promptbutton
+	verbosegivekeyitem GS_BALL
+	writetext WonderTradeForGSBallPichuText2
+	waitbutton
+.done
+	jumpopenedtext WonderTradeGoodbyeText
 
-	para "I come to #mon"
-	line "Centers for the"
+WonderTradeIntroText:
+	text "Hello! Welcome to"
+	line "#Com Center"
+	cont "Wonder Trade Hub."
+	done
 
-	para "latest issues, but"
-	line "they're not the"
+IntroduceTealaText:
+	text "I'm Teala, your"
+	line "trade attendant."
+	done
 
-	para "only place with"
-	line "a subscription."
+WonderTradeExplanationText:
+	text "You can trade"
+	line "#mon with other"
+	cont "people far away."
+	done
+
+WonderTradeCompleteText:
+	text "It's your new"
+	line "partner."
+
+	para "Please take care"
+	line "of it with love."
+	done
+
+WonderTradeGoodbyeText:
+	text "We hope to see you"
+	line "again."
+	done
+
+WonderTradeForGSBallPichuText:
+	text "…But what's this?"
+	line "Is something wrong"
+
+	para "with the Wonder"
+	line "Trade machine?"
+
+	para "It seems like you"
+	line "just traded a"
+
+	para "#mon with"
+	line "yourself."
+
+	para "But that can't be"
+	line "right… You can't"
+
+	para "be in two places"
+	line "at once."
+
+	para "Besides, the ma-"
+	line "chine communicates"
+
+	para "through space,"
+	line "not time…"
+
+	para "And what is that"
+	line "strange Ball it's"
+
+	para "holding? Is it an"
+	line "Apricorn Ball?"
+
+	para "Here, take a look…"
+	done
+
+WonderTradeForGSBallPichuText2:
+	text "It may be unusual,"
+	line "but a #mon"
+	cont "is a #mon."
+
+	para "Please look after"
+	line "it carefully."
 	done
